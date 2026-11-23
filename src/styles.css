@@ -107,15 +107,14 @@
 .profile-card {
   display: grid;
   place-items: center;
-  min-height: 224px;
   padding: 12px;
 }
 
 .profile-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 2 / 1;
-  object-fit: contain;
+  aspect-ratio: 1;
+  object-fit: cover;
   border: 1px solid #344158;
   border-radius: 12px;
 }
@@ -230,6 +229,7 @@
 }
 
 .project-gallery {
+  --phone-image-height: clamp(360px, 62vh, 550px);
   min-width: 0;
   display: grid;
   gap: 8px;
@@ -239,11 +239,35 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 4 / 3;
   object-fit: contain;
   border: 1px solid #344158;
   border-radius: 12px;
   background: #141b29;
+}
+
+/* Os logotipos ocupam um quadro quadrado sem dominar a galeria. */
+.project-slide[src$="/logo_cuidamais.png"],
+.project-slide[src$="/logo_hidrofix.png"] {
+  width: min(100%, 260px);
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+/* As capturas verticais mantêm a tela inteira visível. */
+.project-slide[src$="/homepage_cuidamais.png"],
+.project-slide[src$="/agua.png"] {
+  width: min(100%, calc(var(--phone-image-height) * 0.4865));
+  aspect-ratio: 1449 / 2978;
+  justify-self: center;
+}
+
+.project-slide[src$="/homepage_cuidamais.png"] {
+  aspect-ratio: 1449 / 2961;
+}
+
+.project-slide[src$="/homepage_hidrofix.png"] {
+  aspect-ratio: 1904 / 1176;
 }
 
 .gallery-controls {
@@ -441,11 +465,8 @@
   }
 
   .profile-card {
-    min-height: unset;
-  }
-
-  .profile-photo {
-    max-width: 236px;
+    width: min(100%, 236px);
+    justify-self: center;
   }
 
   .home-section {
