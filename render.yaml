@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: portfolio-eduardo-rauber
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: '24.18.0'
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
